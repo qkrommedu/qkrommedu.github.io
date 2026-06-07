@@ -5,5 +5,5 @@ import react from "@vitejs/plugin-react";
 // Override it at build time with `BASE_PATH` if you rename the repo or use a custom domain.
 export default defineConfig({
   plugins: [react()],
-  base: process.env.BASE_PATH ?? "/linktree/",
+  base: process.env.BASE_PATH ?? "/",
 });
