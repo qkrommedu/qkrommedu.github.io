@@ -7,19 +7,17 @@
 export const profile = {
   name: "Quinn Krommenhoek",
   // Keep the bio short and full of personality — this is the voice of the page.
-  bio: "Software developer who likes clean code, strong coffee, and shipping things that feel good to use.",
-  // Drop an image in /public and reference it as "/your-photo.jpg", or use a URL.
+  bio: "Software developer who loves to surf, find new music, and develop strong backends with Spring",
+  
   // Falls back to a generated monogram avatar if left empty.
   avatar: "",
   // Used to build the fallback monogram avatar.
   initials: "QK",
   location: "California",
-  // Drop your PDF in /public and reference it here (e.g. "/resume.pdf").
   resumePdf: "/qkresume.pdf",
 };
 
 // Each link: { title, url, description, emoji }
-// `emoji` is optional but adds personality and reads well on neo-brutalist cards.
 export const links = [
   {
     title: "Related Work",
@@ -42,7 +40,7 @@ export const links = [
   {
     title: "Résumé",
     url: "/qkresume.pdf",
-    description: "The one-page version (PDF).",
+    description: "Open in a new tab",
     emoji: "📄",
   },
   {
