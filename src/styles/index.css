@@ -1,0 +1,393 @@
+/* ============================================================================
+   Neo-brutalist Linktree
+   - Hard edges, thick borders, offset shadows, loud accents.
+   - The --accent / --accent-deep variables are set at runtime by the
+     time-of-day hook, so the palette shifts depending on when you visit.
+   ========================================================================== */
+
+:root {
+  --ink: #14110f;
+  --paper: #fef6e4;
+  --paper-2: #fffdf8;
+  --border: 3px solid var(--ink);
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-lg: 10px 10px 0 var(--ink);
+
+  /* Defaults; overwritten on mount by useTimeOfDay. */
+  --accent: #ff5d8f;
+  --accent-deep: #c9184a;
+
+  --radius: 16px;
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-display);
+  color: var(--ink);
+  background-color: var(--paper);
+  /* Subtle dotted grid — a neo-brutalist staple. */
+  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -11px -11px;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+/* ----- Layout ------------------------------------------------------------ */
+
+.page {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: start center;
+  padding: clamp(1rem, 4vw, 3rem) 1rem;
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 560px);
+  background: var(--paper-2);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(1.25rem, 5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 5vw, 2.25rem);
+}
+
+/* ----- Animated backdrop blobs ------------------------------------------- */
+
+.page__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  width: 42vmax;
+  height: 42vmax;
+  border-radius: 45% 55% 60% 40%;
+  filter: blur(8px);
+  opacity: 0.45;
+  background: var(--accent);
+  transition: background 1.2s ease;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.blob--one {
+  top: -14vmax;
+  left: -12vmax;
+}
+
+.blob--two {
+  bottom: -16vmax;
+  right: -14vmax;
+  background: var(--accent-deep);
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  to {
+    transform: translate(4vmax, 3vmax) rotate(18deg) scale(1.12);
+  }
+}
+
+/* ----- Profile ----------------------------------------------------------- */
+
+.profile {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  border: var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  background: var(--accent);
+}
+
+.avatar--monogram {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 3rem;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.profile__greeting {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--accent);
+  border: var(--border);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.profile__greeting-emoji {
+  font-size: 1.1rem;
+  animation: wave 2.4s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-8deg);
+  }
+}
+
+.profile__name {
+  margin: 0.2rem 0 0;
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.profile__bio {
+  margin: 0;
+  max-width: 42ch;
+  font-size: clamp(1rem, 3.5vw, 1.1rem);
+  color: #3a332e;
+}
+
+.profile__meta {
+  margin: 0.2rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #5a524b;
+}
+
+/* ----- Links ------------------------------------------------------------- */
+
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.link-card__anchor {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.95rem 1.1rem;
+  background: var(--paper-2);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  font-weight: 700;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.18s ease;
+}
+
+.link-card__anchor:hover,
+.link-card__anchor:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--accent-deep);
+  background: var(--accent);
+  outline: none;
+}
+
+.link-card__anchor:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.link-card__emoji {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.4rem;
+  background: var(--paper);
+  border: var(--border);
+  border-radius: 12px;
+}
+
+.link-card__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.link-card__title {
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.link-card__description {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #5a524b;
+}
+
+.link-card__anchor:hover .link-card__description,
+.link-card__anchor:focus-visible .link-card__description {
+  color: var(--ink);
+}
+
+.link-card__arrow {
+  margin-left: auto;
+  font-size: 1.4rem;
+  font-weight: 900;
+  transition: transform 0.15s ease;
+}
+
+.link-card__anchor:hover .link-card__arrow,
+.link-card__anchor:focus-visible .link-card__arrow {
+  transform: translateX(4px);
+}
+
+/* ----- Resume embed ------------------------------------------------------ */
+
+.resume-embed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.resume-embed__toggle {
+  width: 100%;
+  padding: 0.95rem 1.1rem;
+  background: var(--paper-2);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.18s ease;
+}
+
+.resume-embed__toggle:hover,
+.resume-embed__toggle:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--accent-deep);
+  background: var(--accent);
+  outline: none;
+}
+
+.resume-embed__toggle:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.resume-embed__frame {
+  width: 100%;
+  height: 80vh;
+  min-height: 400px;
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--paper-2);
+}
+
+/* ----- Footer ------------------------------------------------------------ */
+
+.footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #6b635c;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* ----- Responsive tweaks ------------------------------------------------- */
+
+@media (max-width: 420px) {
+  .avatar {
+    width: 104px;
+    height: 104px;
+  }
+
+  .link-card__emoji {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .link-card__description {
+    /* Keep small phones tidy: clamp descriptions to one line. */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
