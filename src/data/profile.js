@@ -15,16 +15,16 @@ export const profile = {
   initials: "QK",
   location: "Earth",
   // Drop your PDF in /public and reference it here (e.g. "/resume.pdf").
-  resumePdf: "/resume.pdf",
+  resumePdf: "/qkresume.pdf",
 };
 
 // Each link: { title, url, description, emoji }
 // `emoji` is optional but adds personality and reads well on neo-brutalist cards.
 export const links = [
   {
-    title: "Portfolio",
-    url: "https://example.com",
-    description: "Selected work, case studies, and side projects.",
+    title: "Related Work",
+    url: "hhttps://webspace.csumb.edu/~krom2772/AdaptiveMoE/",
+    description: "Supporting application for my paper accepted by HCII 2026",
     emoji: "🌐",
   },
   {
@@ -41,13 +41,13 @@ export const links = [
   },
   {
     title: "Résumé",
-    url: "/resume.pdf",
+    url: "/qkresume.pdf",
     description: "The one-page version (PDF).",
     emoji: "📄",
   },
   {
     title: "Email",
-    url: "mailto:you@example.com",
+    url: "mailto:qkrommenhoek@gmail.com",
     description: "Best way to reach me directly.",
     emoji: "✉️",
   },
