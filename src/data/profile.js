@@ -13,7 +13,7 @@ export const profile = {
   avatar: "",
   // Used to build the fallback monogram avatar.
   initials: "QK",
-  location: "Earth",
+  location: "California",
   // Drop your PDF in /public and reference it here (e.g. "/resume.pdf").
   resumePdf: "/qkresume.pdf",
 };
@@ -23,7 +23,7 @@ export const profile = {
 export const links = [
   {
     title: "Related Work",
-    url: "hhttps://webspace.csumb.edu/~krom2772/AdaptiveMoE/",
+    url: "https://webspace.csumb.edu/~krom2772/AdaptiveMoE/",
     description: "Supporting application for my paper accepted by HCII 2026",
     emoji: "🌐",
   },
@@ -35,7 +35,7 @@ export const links = [
   },
   {
     title: "LinkedIn",
-    url: "www.linkedin.com/in/quinn-krommenhoek-970bba248",
+    url: "https://www.linkedin.com/in/quinn-krommenhoek-970bba248",
     description: "Experience, background, and professional updates.",
     emoji: "🔗",
   },
